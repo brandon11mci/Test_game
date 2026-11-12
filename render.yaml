@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: bullet-survivors
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data/bullet-survivors
+      - key: CLIENT_ORIGIN
+        value: https://bullet-survivors-dead-sector.yummyether10.chatgpt.site
+    disk:
+      name: survivor-stats
+      mountPath: /var/data
+      sizeGB: 1
